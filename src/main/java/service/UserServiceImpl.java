@@ -1,27 +1,31 @@
 package service;
 
+import dao.UserDao;
+import dao.UserDaoImpl;
 import java.util.List;
 import models.User;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+    UserDao dao = new UserDaoImpl();
 
     @Override
     public User getUserById(long id) {
-        return null;
+        return dao.getUserById(id).orElseThrow(RuntimeException::new);
     }
 
     @Override
     public List<User> getAllUser() {
-        return null;
+        return dao.getAllUser();
     }
 
     @Override
-    public User deleteUserById(long id) {
-        return null;
+    public boolean deleteUserById(long id) {
+        return dao.deleteUserById(id);
     }
 
     @Override
     public void updateUser(User user) {
-
+        dao.updateUser(user);
     }
 }
