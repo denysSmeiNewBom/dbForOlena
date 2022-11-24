@@ -8,10 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import models.User;
 import utils.ConnectionUtil;
 
 public class UserDaoImpl implements UserDao{
+    private static final Logger log = Logger.getLogger(String.valueOf(UserDaoImpl.class));
     private static final String ID = "id";
     private static final String NAME = "name";
     private static final String AGE = "age";
@@ -34,8 +36,8 @@ public class UserDaoImpl implements UserDao{
                 user.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Can't evaluate  create() for  user: "
-                    + user, e);
+            log.warning("Can't evaluate  create() for  user: " + user);
+            throw new RuntimeException("Can't evaluate  create() for  user: " + user, e);
         } finally {
             connection.close();
         }
